@@ -7,19 +7,16 @@
                     3. publish to 'sqeeuze_seg/points' topic
   -->
 
-  <!-- Path should End with '/' -->
   <param name="npy_path" type="string" value="$(find squeezeseg_ros)/script/data/lidar_2d/" />
-  <param name="npy_path_pred" type="string" value="$(find squeezeseg_ros)/script/data/samples_out_adam/" />
-  <param name="npy_file_list" type="string" value="$(find squeezeseg_ros)/script/ImageSet/val.txt" />
+  <param name="npy_file_list" type="string" value="$(find squeezeseg_ros)/script/data/ImageSet/val.txt" />
   <param name="pub_topic" type="string" value="/squeeze_seg/points" />
-
-  <!-- should be absolute path for checkpoint -->
+  <!-- should be the path for checkpoint -->
   <param name="checkpoint" type="string" value="$(find squeezeseg_ros)/script/data/SqueezeSeg/model.ckpt-23000" />
   <param name="gpu" type="string" value="0" />
 
-  <node pkg="kitti_velodyne_to_ros" type="npy_tensorflow_to_ros_node.py" name="npy_tensorflow_to_ros" output="screen" />
+  <node pkg="squeezeseg_ros" type="squeezeseg_ros_node.py" name="squeezeseg_ros_node" output="screen" />
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kitti_velodyne_to_ros)/rviz/npy_velodyne_to_ros.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find squeezeseg_ros)/rviz/squeezeseg_ros.rviz" />
 
 </launch>
 

@@ -116,7 +116,6 @@ class NPY_TENSORFLOW_TO_ROS():
                       clock.takeRealTime())
 
     # create pc2_msg with 5 fields
-
     def create_cloud_xyzil32(self, header, points):
         fields = [PointField('x', 0, PointField.FLOAT32, 1),
                   PointField('y', 4, PointField.FLOAT32, 1),
@@ -127,10 +126,9 @@ class NPY_TENSORFLOW_TO_ROS():
 
 
 if __name__ == '__main__':
-    rospy.init_node('npy_tensorflow_ros_node')
+    rospy.init_node('squeezeseg_ros_node')
 
     npy_path = rospy.get_param('npy_path')
-    npy_path_pred = rospy.get_param('npy_path_pred')
     npy_file_list = rospy.get_param('npy_file_list')
 
     pub_topic = rospy.get_param('pub_topic')
@@ -141,7 +139,7 @@ if __name__ == '__main__':
     tf.app.flags.DEFINE_string(
         'checkpoint', checkpoint,
         """Path to the model paramter file.""")
-    tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
+    tf.app.flags.DEFINE_string('gpu', gpu, """gpu id.""")
 
     npy_tensorflow_to_ros = NPY_TENSORFLOW_TO_ROS(pub_topic=pub_topic,
                                                   FLAGS=FLAGS,
